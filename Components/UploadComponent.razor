@@ -1,0 +1,63 @@
+<MudPaper Height="400px" Width="100%">
+    <MudContainer Class="d-flex flex-column pa-5 align-center">
+        <h1 style="text-align: center; padding-bottom: 1rem">Upload a spreadsheet</h1>
+        <h2>Selected file: @fileName</h2>
+        @if (string.IsNullOrEmpty(fileName))
+        {
+            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                <ButtonTemplate>
+                    <MudButton HtmlTag="label"
+                            Variant="Variant.Filled"
+                            Color="Color.Info"
+                            StartIcon="@Icons.Material.Filled.CloudUpload"
+                            for="@context.Id">
+                        Upload File
+                    </MudButton>
+                </ButtonTemplate>
+            </MudFileUpload>
+        }
+        else
+        {
+            <MudContainer Class="d-flex flex-row justify-center">
+                <MudButton 
+                    Variant="Variant.Filled" 
+                    Color="Color.Info" 
+                    StartIcon="@Icons.Material.Filled.Save"
+                    OnClick="SaveFile"
+                    Class="mx-1 px-5"
+                >
+                    Save
+                </MudButton>
+                <MudButton 
+                    Variant="Variant.Filled" 
+                    Color="Color.Secondary" 
+                    OnClick="ClearFile"
+                    Class="mx-1 px-5"
+                >
+                    Clear
+                </MudButton>
+
+            </MudContainer>
+        }
+    </MudContainer>
+</MudPaper>
+
+@code {
+    private IBrowserFile selectedFile;
+    private string fileName;
+    private void UploadFiles(IBrowserFile file)
+    {
+        selectedFile = file;
+        fileName = selectedFile.Name;
+        //TODO upload the files to the server
+    }
+    private void SaveFile()
+    {
+        //TODO save the file
+    }
+    private void ClearFile()
+    {
+        //TODO clear the file
+        fileName = null;
+    }
+}
