@@ -1,8 +1,12 @@
-@page "/dataview"
 @using OfficeOpenXml
-@inject IJSRuntime JSRuntime
 
-<MudTable Items="@Elements" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+<MudTable 
+    Items="@Elements" 
+    Hover="true" 
+    Breakpoint="Breakpoint.Sm" 
+    Loading="@_loading" 
+    LoadingProgressColor="Color.Info"
+>
    <HeaderContent>
        @foreach (var header in headers)
        {

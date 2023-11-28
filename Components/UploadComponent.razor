@@ -1,10 +1,10 @@
-<MudPaper Height="400px" Width="100%">
+<MudPaper Height="100%" Width="100%">
     <MudContainer Class="d-flex flex-column pa-5 align-center">
         <h1 style="text-align: center; padding-bottom: 1rem">Upload a spreadsheet</h1>
         <h2>Selected file: @fileName</h2>
         @if (string.IsNullOrEmpty(fileName))
         {
-            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile">
                 <ButtonTemplate>
                     <MudButton HtmlTag="label"
                             Variant="Variant.Filled"
@@ -18,48 +18,83 @@
         }
         else
         {
-            <DataViewComponent ExcelFile="@selectedFile"/>
+            @if (@validFileType)
+            {
+                <DataViewComponent ExcelFile="@selectedFile"/>
 
-            <MudContainer Class="d-flex flex-row justify-center">
-                <MudButton 
-                    Variant="Variant.Filled" 
-                    Color="Color.Info" 
-                    StartIcon="@Icons.Material.Filled.Save"
-                    OnClick="SaveFile"
-                    Class="mx-1 px-5"
-                >
-                    Save
-                </MudButton>
-                <MudButton 
-                    Variant="Variant.Filled" 
-                    Color="Color.Secondary" 
-                    OnClick="ClearFile"
-                    Class="mx-1 px-5"
-                >
-                    Clear
-                </MudButton>
+                <MudContainer Class="d-flex flex-row justify-center mt-5">
+                    <MudButton 
+                        Variant="Variant.Filled" 
+                        Color="Color.Info" 
+                        StartIcon="@Icons.Material.Filled.Save"
+                        OnClick="SaveFile"
+                        Class="mx-1 px-5"
+                    >
+                        Save
+                    </MudButton>
+                    <MudButton 
+                        Variant="Variant.Filled" 
+                        Color="Color.Secondary" 
+                        OnClick="ClearFile"
+                        Class="mx-1 px-5"
+                    >
+                        Clear
+                    </MudButton>
 
-            </MudContainer>
+                </MudContainer>
+            }
+            else {
+                <MudAlert 
+                    Severity="Severity.Error" 
+                    Variant="Variant.Filled"
+                    Dense="true"
+                >
+                    Invalid file format. Please submit a file ending in .xls or .xlsx
+                </MudAlert>
+
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFile">
+                    <ButtonTemplate>
+                        <MudButton HtmlTag="label"
+                                Variant="Variant.Filled"
+                                Color="Color.Info"
+                                StartIcon="@Icons.Material.Filled.CloudUpload"
+                                for="@context.Id">
+                            Upload File
+                        </MudButton>
+                    </ButtonTemplate>
+                </MudFileUpload>
+            }
         }
     </MudContainer>
 </MudPaper>
 
 @code {
     private IBrowserFile selectedFile;
-    private string fileName;
-    private void UploadFiles(IBrowserFile file)
+    private string fileName = "";
+    private bool validFileType = false;
+    private void UploadFile(IBrowserFile file)
     {
+        string extension = Path.GetExtension(file.Name);
         selectedFile = file;
         fileName = selectedFile.Name;
-        //TODO upload the files to the server
+
+        if (extension.Equals(".xls") || extension.Equals(".xlsx"))
+        {
+            validFileType = true;
+        }
+        else
+        {
+            validFileType = false;
+        }
     }
     private void SaveFile()
     {
-        //TODO save the file
+        //TODO save the file to SQL Sever
     }
     private void ClearFile()
     {
-        //TODO clear the file
-        fileName = null;
+        selectedFile = null;
+        fileName = "";
     }
+
 }
