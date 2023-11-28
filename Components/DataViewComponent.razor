@@ -1,0 +1,61 @@
+@page "/dataview"
+@using OfficeOpenXml
+@inject IJSRuntime JSRuntime
+
+<MudTable Items="@Elements" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+   <HeaderContent>
+       @foreach (var header in headers)
+       {
+           <MudTh>@header</MudTh>
+       }
+   </HeaderContent>
+   <RowTemplate>
+       @foreach (var header in headers)
+       {
+           <MudTd DataLabel="@header">@context.Data[header]</MudTd>
+       }
+   </RowTemplate>
+</MudTable>
+
+@code {
+  private bool _hidePosition;
+  private bool _loading;
+  private List<Element> Elements = new List<Element>();
+  private List<string> headers = new List<string>(); // Define headers here
+
+  [Parameter]
+  public IBrowserFile ExcelFile { get; set; }
+
+  protected override async Task OnInitializedAsync()
+  {
+      if (ExcelFile != null)
+      {
+          using var stream = ExcelFile.OpenReadStream();
+          using var ms = new MemoryStream();
+          await stream.CopyToAsync(ms);
+          ms.Position = 0; // Reset the position of the MemoryStream to the beginning
+
+          using var package = new ExcelPackage(ms);
+          var worksheet = package.Workbook.Worksheets[0]; // Get the first worksheet
+
+          // Read the headers
+          headers.Clear(); // Clear the headers in case the file is changed
+          for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+          {
+              headers.Add(worksheet.Cells[1, col].Value.ToString());
+          }
+
+          // Read the data
+          for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+          {
+              var element = new Element();
+              for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+              {
+                 element.Data.Add(headers[col - 1], worksheet.Cells[row, col].Value);
+              }
+              Elements.Add(element);
+          }
+      }
+  }
+}
+

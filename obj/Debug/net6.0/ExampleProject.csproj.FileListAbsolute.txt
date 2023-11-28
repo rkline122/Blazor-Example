@@ -43,3 +43,14 @@ C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\MudBla
 C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\System.IO.Pipelines.dll
 C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\obj\Debug\net6.0\ExampleProject.csproj.AssemblyReference.cache
 C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\obj\Debug\net6.0\ExampleProject.csproj.CopyComplete
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\EPPlus.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\EPPlus.Interfaces.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Ryan\Documents\Projects\PeopleIT\ExampleProject\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
